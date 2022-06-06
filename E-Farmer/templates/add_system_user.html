@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}E - Farmer{% endblock %}
+{% block content %}
+
+<div class="row">
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+
+      <div class="card-body">
+        <h4 class="card-title">Add System User</h4>
+
+        <form class="forms-sample" id="form">
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control text-light" id="name" placeholder="Name">
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control text-light" id="email" placeholder="Email">
+          </div>
+
+          <div class="form-group">
+            <label for="psw">Password</label>
+            <input type="password" class="form-control text-light" id="psw" placeholder="Password">
+          </div>
+
+          <button type="submit" id="btnAdd" class="btn btn-primary me-2">Add</button>
+          <a href="/index" class="btn btn-dark">Cancel</a>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  $(function () {
+    $('#btnAdd').click(function () {
+
+      var name = $('#name').val();
+      var email = $('#email').val();
+      var psw = $('#psw').val();
+
+      var title = "<h1 style='color:gray'>Add System User</h1>"
+
+      if (name == "" || email == "" || psw == "") {
+        Swal.fire(title, "Fields are empty!", "warning");
+        return false;
+
+      } else {
+
+        var form_data = new FormData();
+        form_data.append('name', $('#name').val());
+        form_data.append('email', $('#email').val());
+        form_data.append('psw', $('#psw').val());
+
+        $.ajax({
+          url: "/add_system_user_details",
+          enctype: 'multipart/form-data',
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+          type: 'POST',
+        })
+          .done(function (data) {
+            if (data.error) {
+              Swal.fire(title, data.error, "warning");
+            }
+            else if (data.success) {
+              $("#form")[0].reset();
+              Swal.fire(title, data.success, "success");
+            }
+            else {
+              Swal.fire(title, "Some error occur", "warning");
+            }
+          });
+
+        event.preventDefault();
+
+      }
+    });
+  });
+
+</script>
+
+{% endblock %}

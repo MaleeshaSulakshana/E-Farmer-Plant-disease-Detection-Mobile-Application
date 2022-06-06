@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}E - Farmer{% endblock %}
+{% block content %}
+
+
+<div class="row">
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+
+      <div class="card-body">
+        <h4 class="card-title">Update Image</h4>
+
+        <form class="forms-sample" id="form">
+
+          <div class="form-group">
+            <label>Image</label>
+            <input type="file" name="img[]" class="file-upload-default" id="image" accept="image/*">
+            <div class="input-group col-xs-12">
+              <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image" required>
+              <span class="input-group-append">
+                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+              </span>
+            </div>
+          </div>
+
+
+          <button type="submit" id="btn" class="btn btn-primary me-2">Predict</button>
+          <a href="/all_diseases" class="btn btn-dark">Cancel</a>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  $(function () {
+    $('#btn').click(function () {
+
+      var form_data = new FormData();
+      form_data.append('image', $('#image').prop('files')[0]);
+
+      Swal.fire({
+        title: "<h1 style='color:gray'>Waiting... </h1>",
+        showConfirmButton: false,
+        closeOnClickOutside: false,
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      });
+
+      $.ajax({
+        url: '/api/detect_disease',
+        enctype: 'multipart/form-data',
+        data: form_data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        type: 'POST',
+      })
+        .done(function (data) {
+
+          if (data.error) {
+            swal.close();
+            Swal.fire("Prediction", data.error, "warning");
+          }
+          else if (data) {
+            swal.close();
+            var title = "<h1 style='color:gray'>Plant : " + data.plant + ", Disease: " + data.disease + ", Accuracy : " + data.accuracy + "</h1>"
+            Swal.fire(title, data.error, "success");
+          } else {
+            swal.close();
+            Swal.fire("Prediction", "Some error occur!", "warning");
+          }
+
+        });
+
+      event.preventDefault();
+
+      return false;
+    });
+  });
+
+</script>
+
+{% endblock %}

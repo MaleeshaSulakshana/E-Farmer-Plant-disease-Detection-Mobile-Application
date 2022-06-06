@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_box_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:src="@drawable/success"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/green"
+            android:text="Detection Details"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textAllCaps="true"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plant      : "
+                android:fontFamily="sans-serif-condensed-light"
+                android:textColor="@color/gray2"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/plantName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apple"
+                android:gravity="right"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disease : "
+                android:textColor="@color/gray2"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/diseaseName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Black Spot"
+                android:gravity="right"
+                android:textColor="@color/red1"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="See more information about this disease to help you take care the plant."
+            android:textColor="@color/gray2"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textSize="17dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnNo"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_stoke_gray"
+                android:textColor="@color/gray2"
+                android:text="NO"
+                android:fontFamily="sans-serif-condensed-light"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="left"
+                app:backgroundTint="@null"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnYes"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_background"
+                android:text="YES"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="right"
+                app:backgroundTint="@null"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

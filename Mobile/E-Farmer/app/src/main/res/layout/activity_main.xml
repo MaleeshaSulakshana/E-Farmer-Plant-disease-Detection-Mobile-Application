@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/logo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Welcome to E-Farmer"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="28dp"/>
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="The best way to find disease in the plants. get acquainted with the latest technology for future diseases. know the demand for agricultural crops and read themertic news. Let's get started."
+            android:gravity="center"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textSize="14dp"/>
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_background"
+            android:text="Get Started"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif"
+            app:backgroundTint="@null"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% block title %}E - Farmer{% endblock %}
+{% block content %}
+
+
+{% if details %}
+
+<div class="row">
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+
+      <div class="card-body">
+        <h4 class="card-title">View Disease & Treatment Details</h4>
+
+        <form class="forms-sample">
+
+          <div class="form-group">
+            <label for="id">Disease Id</label>
+            <input type="text" class="form-control text-dark" id="id" placeholder="Disease Id"
+              value="{{ details[0][0] }}" disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="plant">Plant Name</label>
+            <input type="text" class="form-control text-light" id="plant" placeholder="Plant Name"
+              value="{{ details[0][1] }}">
+          </div>
+
+          <div class="form-group">
+            <label for="disease">Disease Name</label>
+            <input type="text" class="form-control text-light" id="disease" placeholder="Disease Name"
+              value="{{ details[0][2] }}">
+          </div>
+
+          <div class="form-group">
+            <label for="details">Disease Details</label>
+            <textarea class="form-control text-light" id="details" rows="4"
+              placeholder="Disease Details">{{ details[0][3] }}</textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="treatments">Treatments Details</label>
+            <textarea class="form-control text-light" id="treatments" rows="4"
+              placeholder="Treatments Details">{{ details[0][4] }}</textarea>
+          </div>
+
+
+          <button type="submit" id="btn" class="btn btn-primary me-2">Update</button>
+          <a href="/all_diseases" class="btn btn-dark">Cancel</a>
+
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+
+      <div class="card-body">
+        <h4 class="card-title">Update Image</h4>
+
+        <form class="forms-sample" id="form">
+
+          <div class="form-group">
+            <label>Image</label>
+            <input type="file" name="img[]" class="file-upload-default" id="image" accept="image/*">
+            <div class="input-group col-xs-12">
+              <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image" required>
+              <span class="input-group-append">
+                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+              </span>
+            </div>
+          </div>
+
+
+          <button type="submit" id="image-btn" class="btn btn-primary me-2">Add</button>
+          <a href="/all_diseases" class="btn btn-dark">Cancel</a>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+<script>
+
+  $(function () {
+    $('#btn').click(function () {
+
+      var title = "<h1 style='color:gray'>Update Disease & Treatments</h1>"
+
+      if ($('#plant').val() == "" || $('#disease').val() == "" ||
+        $('#details').val() == "" || $('#treatments').val() == "") {
+        Swal.fire(title, "Fields are empty!", "warning");
+        return false;
+
+      } else {
+
+        var form_data = new FormData();
+        form_data.append('id', $('#id').val());
+        form_data.append('plant', $('#plant').val());
+        form_data.append('disease', $('#disease').val());
+        form_data.append('details', $('#details').val());
+        form_data.append('treatments', $('#treatments').val());
+
+        $.ajax({
+          url: "/update_disease_and_treatments",
+          enctype: 'multipart/form-data',
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+          type: 'POST',
+        })
+          .done(function (data) {
+            if (data.error) {
+              Swal.fire(title, data.error, "warning");
+            }
+            else if (data.success) {
+              Swal.fire(title, data.success, "success");
+            }
+            else {
+              Swal.fire(title, "Some error occur", "warning");
+            }
+          });
+
+        event.preventDefault();
+
+      }
+    });
+  });
+
+
+  $(function () {
+    $('#image-btn').click(function () {
+
+      var title = "<h1 style='color:gray'>Update Disease & Treatments Image</h1>"
+
+      if ($('#plant').val() == "" || $('#disease').val() == "" ||
+        $('#image').val() == "") {
+        Swal.fire(title, "Fields are empty!", "warning");
+        return false;
+
+      } else {
+
+        var form_data = new FormData();
+        form_data.append('id', $('#id').val());
+        form_data.append('plant', $('#plant').val());
+        form_data.append('disease', $('#disease').val());
+        form_data.append('image', $('#image').prop('files')[0]);
+
+        $.ajax({
+          url: "/update_disease_and_treatments_image",
+          enctype: 'multipart/form-data',
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+          type: 'POST',
+        })
+          .done(function (data) {
+            if (data.error) {
+              Swal.fire(title, data.error, "warning");
+            }
+            else if (data.success) {
+              $("#form")[0].reset();
+              Swal.fire(title, data.success, "success");
+            }
+            else {
+              Swal.fire(title, "Some error occur", "warning");
+            }
+          });
+
+        event.preventDefault();
+
+      }
+    });
+  });
+
+</script>
+
+{% endblock %}

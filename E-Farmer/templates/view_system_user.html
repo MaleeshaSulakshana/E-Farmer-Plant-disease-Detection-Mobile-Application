@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}E - Farmer{% endblock %}
+{% block content %}
+
+<div class="row">
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+
+      <div class="card-body">
+        <h4 class="card-title">Add System User</h4>
+
+        {% if details %}
+
+        <form class="forms-sample">
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control text-dark" id="name" placeholder="Name" value="{{ details[0][1] }}"
+              disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control text-dark" id="email" placeholder="Email"
+              value="{{ details[0][2] }}" disabled>
+          </div>
+
+        </form>
+
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

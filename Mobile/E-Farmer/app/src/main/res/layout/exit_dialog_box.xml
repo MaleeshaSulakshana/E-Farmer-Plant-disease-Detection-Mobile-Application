@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_box_background">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:textColor="@color/gray2"
+        android:text="Do you want to exit?"
+        android:fontFamily="sans-serif-condensed-light"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnNo"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_stoke_gray"
+                android:textColor="@color/gray2"
+                android:text="NO"
+                android:fontFamily="sans-serif-condensed-light"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="left"
+                app:backgroundTint="@null"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnYes"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="@drawable/button_background"
+                android:text="YES"
+                android:fontFamily="sans-serif-condensed-light"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="right"
+                app:backgroundTint="@null"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block title %}E - Farmer{% endblock %}
+{% block content %}
+
+<div class="row">
+  <div class="col-12 grid-margin stretch-card">
+    <div class="card">
+
+      <div class="card-body">
+        <h4 class="card-title">Change Model</h4>
+
+        <form class="forms-sample" id="form">
+
+          <div class="form-group">
+            <label>Upload Model</label>
+            <input type="file" name="model[]" class="file-upload-default" id="model" accept=".h5">
+            <div class="input-group col-xs-12">
+              <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Model">
+              <span class="input-group-append">
+                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Upload Classes</label>
+            <input type="file" name="pickle[]" class="file-upload-default" id="pickle" accept=".pkl">
+            <div class="input-group col-xs-12">
+              <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Classes">
+              <span class="input-group-append">
+                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+              </span>
+            </div>
+          </div>
+
+          <button type="submit" id="btn" class="btn btn-primary me-2">Change</button>
+          <a href="/model_details" class="btn btn-dark">Cancel</a>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+  $(function () {
+    $('#btn').click(function () {
+
+      var title = "<h1 style='color:gray'>Change Model</h1>"
+      var waiting_title = "<h1 style='color:gray'>Waiting</h1>"
+
+      if ($('#model').val() == "" || $('#pickle').val() == "") {
+        Swal.fire(title, "Fields are empty!", "warning");
+        return false;
+
+      } else {
+
+        var form_data = new FormData();
+        form_data.append('model', $('#model').prop('files')[0]);
+        form_data.append('pickle', $('#pickle').prop('files')[0]);
+
+        Swal.fire({
+          title: waiting_title,
+          text: "Don't refresh page. Model changing ongoing.",
+          showConfirmButton: false,
+          closeOnClickOutside: false,
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        });
+
+        $.ajax({
+          url: "model_change",
+          enctype: 'multipart/form-data',
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+          type: 'POST',
+        })
+          .done(function (data) {
+            if (data.error) {
+              Swal.fire(title, data.error, "warning");
+            }
+            else if (data.success) {
+              $("#form")[0].reset();
+              Swal.fire(title, data.success, "success");
+            }
+            else {
+              Swal.fire(title, "Some error occur!", "warning");
+            }
+          });
+
+        event.preventDefault();
+
+        return false;
+      }
+    });
+  });
+
+</script>
+
+{% endblock %}

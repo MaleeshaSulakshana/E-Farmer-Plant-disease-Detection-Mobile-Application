@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}E - Farmer{% endblock %}
+{% block content %}
+
+
+<div class="row ">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">System Users</h4>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th> Name </th>
+                <th> Email </th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {% if users %}
+              {% for user in users %}
+
+              <tr>
+                <td> {{ user[1] }} </td>
+                <td> {{ user[2] }} </td>
+                <td>
+                  <a href="/view_system_user?id={{ user[0] }}" class="btn btn-inverse-success btn-fw ">View</a>
+                </td>
+                <td>
+                  <button class="btn btn-inverse-danger btn-fw" onclick="remove('{{ user[0] }}')">Delete</button>
+                </td>
+              </tr>
+
+              {% endfor %}
+              {% else %}
+              <tr>
+                <td colspan="5">
+                  <center>No more system users.</center>
+                </td>
+              </tr>
+              {% endif %}
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  function remove($id) {
+
+
+    Swal.fire({
+      title: "<h1 style='color:gray'>" + "Are you sure?" + "</h1>",
+      text: "Do you wont remove!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, remove'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        var form_data = new FormData();
+        form_data.append('id', $id);
+
+        $.ajax({
+          url: "/remove_system_user",
+          enctype: 'multipart/form-data',
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+          type: 'POST',
+        })
+          .done(function (data) {
+            if (data.error) {
+              Swal.fire("<h1 style='color:gray'>" + "Remove System User" + "</h1>", data.error, "warning");
+            }
+            else if (data.success) {
+              Swal.fire("<h1 style='color:gray'>" + "Remove System User" + "</h1>", data.success, "success");
+              window.location.reload();
+            }
+            else {
+              Swal.fire("<h1 style='color:gray'>" + "Remove System User" + "</h1>", "Some error occur", "warning");
+            }
+          });
+
+      }
+    })
+
+    event.preventDefault();
+
+  }
+
+</script>
+
+{% endblock %}
